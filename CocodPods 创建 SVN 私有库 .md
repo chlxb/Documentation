@@ -98,7 +98,7 @@ pod repo-svn add TJSpecRepo svn://192.168.0.88/ios/SpecRepo
 
 ### <a name="create-podspec-file">3.5 编写podsepc文件</a>
 
-以上工作完成之后，要编写 podspec 文件，好让 Pod 知道我们的库在被人使用时，需要遵守的规则、编译的代码文件、资源文件、引入的系统库、依赖的第三方等等。我们把 [3.3](#create-framework-svn)创建的项目克隆到本地，一般情况，我们会把每个项目的 podspec 文件放在项目中，有修改时再推送到私有索引库中，我们在 LXBLog项目下，执行命令：
+以上工作完成之后，要编写 podspec 文件，好让 Pod 知道我们的库在被人使用时，需要遵守的规则、编译的代码文件、资源文件、引入的系统库、依赖的第三方等等。我们把 [3.3](#create-framework-svn) 创建的项目克隆到本地，一般情况，我们会把每个项目的 podspec 文件放在项目中，有修改时再推送到私有索引库中，我们在 LXBLog项目下，执行命令：
 
 ```
 pod spec create LXBLog
@@ -114,24 +114,37 @@ pod spec create LXBLog
 ---
 # 名字，用来使用或者搜索时的名字
 s.name         = "LXBLog" 	
+
 # 版本号
 s.version      = "0.0.1"	
+
 # 简介
 s.summary      = "A short description of LXBLog."  
+
 # 详情描述，用来详细描述库的用途
 s.description  = <<-DESC
                  DESC
+
 # 主页，可以是官网，github 地址等可用地址，否则会报错
 s.homepage     = "http://EXAMPLE/LXBLog" 
+
 # 授权 license，私有库往往是在局域网使用，只要存在 license 即可，如果是要开源的库，那么要注意你自己选择的授权。
 s.license      = "MIT (example)"	
+
 # 邮箱
 s.author       = { "author name" => "author_email@163.com" }
+
 # source 对应的私有库地址，及用来检索库的地址，官网上对此项有比较多的例子来介绍
 s.source       = { :git => "http://EXAMPLE/LXBLog.git", :tag => "#{s.version}" }
+
 # 项目所包含的代码源文件，可以是 swift、h、m、mm、c、cpp 等格式的文件
 s.source_files  = "Classes", "Classes/**/*.{h,m}"
-s.dependency "JSONKit", "~> 1.4"	# 项目的其他 CocoaPods 库的依赖
+
+# 资源文件
+s.resources 	  = ['Source/readme', Source/XXXX.bundle]
+
+# 项目的其他 CocoaPods 库的依赖
+s.dependency "JSONKit", "~> 1.4"	
 ---
 ```
 
@@ -164,7 +177,14 @@ pod search LXBLog
 
 ![Image text](/img/9D58F6C4-C66B-4E65-BAEB-9D523AD1CDD1.png)
 
-什么？pod search 都能找到我们的私有库，为什么 install 的时候 Unable to find ？这是因为默认情况下 Pod 都是从 CocoaPods 的官方仓库去查找索引的，我们的私有库是放在我们自己的 svn 索引仓库里，此时当然无法在官方仓库找到。继续对 Podfile 做如下修改，添加红色标记的内容，然后再执行 `pod install`命令：
+什么？pod search 都能找到我们的私有库，为什么 install 的时候 Unable to find ？这是因为默认情况下 Pod 都是从 CocoaPods 的官方仓库源去查找索引的，我们的私有库是放在我们自己的 svn 索引仓库里，此时当然无法在官方源找到。继续对 Podfile 做如下修改，添加红色标记的内容，然后再执行 `pod install`命令：
+
+```
+source 'https://github.com/CocoaPods/Specs.git'
+plugin 'cocoapods-repo-svn', :sources => [
+           'svn://192.168.0.19/ios/TJSpecRepo'
+      ]
+```
 
 ![Image text](/img/D84624BB-999A-403C-813D-41CF700B30D9.png)
 
@@ -172,17 +192,45 @@ pod search LXBLog
 
 ![Image text](/img/56D73014-CEA4-450C-8CB1-31B8F7D6720E.png)
 
+***如果是 git 创建的私有仓库，那么添加形如 `source 'https://github.com/CocoaPods/Specs.git'` 的仓库地址就可以了，不需要添加`plugin 'cocoapods-repo-svn' ...`***
 
 ## <a name=title4>四、后续</a>
 
+进行到上一步看起来我们的私有库已经可以正常工作了，但其实还不算完。以上过程相当于整合所有网上资料后的结果，但是在此过程中遇到的一些问题，也是有必要了解的。
+
+* 可以使用私有的 git 仓库来存放 podspec 文件 
+	
+	sdsd dsdsds 
+
+* 可以不创建私有 SpecRepo 仓库
+	
+	ssss
+	
+* 可以不将 podspec 推送到远程服务器
+
+	sss
+
+* 可以不安装 repo-svn 插件
+
+	ssss
+
+* 私有库怎么依赖别的私有库
+
+	ssss
+
+
 ## <a name=title5>五、常见问题</a>
+
 
 
 [link-cocoapods-repo-svn-github]: https://github.com/dustywusty/cocoapods-repo-svn
 [link-Podspec-Syntax-Reference]: https://guides.cocoapods.org/syntax/podspec.html
 [link-Command-line-Reference]: https://guides.cocoapods.org/terminal/commands.html
 
+--
+
 ***参考文档***
+--
 
 * [1] <https://guides.cocoapods.org/syntax/podspec.html> Podspec Syntax Reference
 * [2] <https://guides.cocoapods.org/syntax/podfile.html> Podfile Syntax Reference
@@ -191,6 +239,6 @@ pod search LXBLog
 * [5] <https://github.com/CocoaPods/CocoaPods/> CocoaPods’s GitHub
 * [6] <https://github.com/dustywusty/cocoapods-repo-svn> cocoapods-repo-svn's GitHub
 
-
+--
 
 ### THE END
