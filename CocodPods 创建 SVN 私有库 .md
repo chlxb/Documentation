@@ -135,13 +135,13 @@ s.dependency "JSONKit", "~> 1.4"	# 项目的其他 CocoaPods 库的依赖
 ---
 ```
 
-![Image text](/Users/lxb/Documents/lxb/Documentation/img/CA13962C-2AAE-4BF8-8642-D7EDBC077E74.png)
+![Image text](/img/CA13962C-2AAE-4BF8-8642-D7EDBC077E74.png)
 
-![Image text](/Users/lxb/Documents/lxb/Documentation/img/6B7E6203-7F70-47C8-B789-583F163A6C75.png)
+![Image text](/img/6B7E6203-7F70-47C8-B789-583F163A6C75.png)
 
 podspec 文件编辑好之后，可以通过终端命令`pod lib lint`来验证语法以及格式是否正确，关于该命令的使用可以参看 [Command-line-Reference][link-Command-line-Reference]。终端会给出错误的原因以及错误所在，按照提示进行修改直到可以通过验证。license文件要存放在指定的路径下，例如上图中 `s.license = { :type => "MIT", :file => "LICENSE" }` 那么在项目目录下，需要存在对应的名为 `LICENSE` 的文件。由于我的例子使用 swift 编写，swift_version 在低版本的 Pod 上面是不支持的，因此某些错误情况可能需要先对 CocoaPods 进行升级，编辑该文档时，我的 CocoaPods 版本是 `1.5.3`
 
-![Image text](/Users/lxb/Documents/lxb/Documentation/img/3F71EF6B-BCBD-45A4-9683-23F58A98634D.png)
+![Image text](/img/3F71EF6B-BCBD-45A4-9683-23F58A98634D.png)
 
 之后我们把便捷好的 podspec 文件推送到我们本地的私有 SpecRepo 中，**执行命令:**
 
@@ -160,17 +160,17 @@ pod search LXBLog
 万事俱备！现在可以使用我们的私有库了，创建 `PodTest` 项目,在项目目录下**执行命令：**
 `pod init`会在 PodTest 中生成了默认的 Podfile 文件。假设我们的项目还要只用 Alamofire 网络库，因此将内容按照下图修改，然后**执行命令**`pod install`，看看发生了什么。
 
-![Image text](/Users/lxb/Documents/lxb/Documentation/img/EC8B9623-96B9-4FC4-B1C2-B16843899F6D.png)
+![Image text](/img/EC8B9623-96B9-4FC4-B1C2-B16843899F6D.png)
 
-![Image text](/Users/lxb/Documents/lxb/Documentation/img/9D58F6C4-C66B-4E65-BAEB-9D523AD1CDD1.png)
+![Image text](/img/9D58F6C4-C66B-4E65-BAEB-9D523AD1CDD1.png)
 
 什么？pod search 都能找到我们的私有库，为什么 install 的时候 Unable to find ？这是因为默认情况下 Pod 都是从 CocoaPods 的官方仓库去查找索引的，我们的私有库是放在我们自己的 svn 索引仓库里，此时当然无法在官方仓库找到。继续对 Podfile 做如下修改，添加红色标记的内容，然后再执行 `pod install`命令：
 
-![Image text](/Users/lxb/Documents/lxb/Documentation/img/D84624BB-999A-403C-813D-41CF700B30D9.png)
+![Image text](/img/D84624BB-999A-403C-813D-41CF700B30D9.png)
 
 不出意外，会得到大概类似如下图中的输出，打开项目，就可以正常引入我们的 `LXBLog` 以及 `Alamofire` 库，并正常使用。
 
-![Image text](/Users/lxb/Documents/lxb/Documentation/img/56D73014-CEA4-450C-8CB1-31B8F7D6720E.png)
+![Image text](/img/56D73014-CEA4-450C-8CB1-31B8F7D6720E.png)
 
 
 ## <a name=title4>四、后续</a>
