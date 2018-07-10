@@ -20,8 +20,8 @@ CocoaPods 是 iOS 开发过程中常用的解决快速集成和依赖第三方�
 
 > 2. [安装 CocoaPods 插件 cocoapods-repo-svn](#install-cocoapods-repo-svn)
 > 3. [创建私有`Spec`文件 SVN 仓库](#create-spec-svn)
-> 4. [本地添加 CocoaPods 私有 Repo](#create-private-repo)
-> 5. [创建私有库项目的 SVN 仓库](#create-framework-svn)；
+> 4. [创建私有库项目的 SVN 仓库](#create-framework-svn)
+> 5. [本地添加 CocoaPods 私有 Repo](#create-private-repo)
 > 6. [创建项目的 podsepc文件（推送到私有 Repo）](#create-podspec-file)
 > 7. [编辑集成项目的 podfile 文件，pod install](#create-podfile)
 
@@ -60,15 +60,40 @@ pod repo-svn push `Repo` [NAME.podspec] // 将指定 podsepc 文件推送到指�
 
 文章最开始就已经简单介绍了 Pod 的工作原理，所以只要 pod 可以正确获取到对应库的 podspec 文件，就能够根据文件内容去配置库的依赖。如果公司是以 git 作为版本控制，那么按照官网的文档，创建私有的 spec git 仓库即可满足需求。那么当版本控制使用的是 svn 的时候，也可以是同样的思路，可以创建 spec 的 git 仓库，私有库项目放在 svn 上。spec 仓库可以自己搭建，也可以使用公共的诸如 coding、码云、github 等网站创建私有仓库。但这种同时使用 svn 跟 git 的方案看起来有点奇葩，也有点不够统一。实际上，我们完全可以使用 svn 的仓库来存放 podspec 文件。
 
-### <a name="create-private-repo">3.3 添加 CocoaPods 私有 Repo</a>
-
-### <a name="create-framework-svn">3.4 创建私有库的 SVN 仓库</a>
+### <a name="create-framework-svn">3.3 创建私有库的 SVN 仓库</a>
 
 创建准备作为私有库的项目，此处我们以 `LXBLog` 项目为例，该项目功能是根据预设级别打印日志，假设我们要将该功能做成一个 framework，供别的项目使用。一般情况下，我们需要对工程做一些设置，比如添加header文件、资源文件、编译文件、引用的其他库，甚至还有比如 `-ObjC`, 静态库标识等。
 
 ![Image text](/img/095DE7F7-4B50-4D8D-843B-8C2F5F7C85D6.png)
 
 在项目目录下创建 `Classes` 目录用来存储 framework 需要编译的所有文件，创建 LXBLog.bundle 用来存放所有的资源文件。编写好代码之后，往常情况是我们编译生成对应的 framework 。现在我们用 Pod 来管理依赖，所以我们需要创建 podspec文件来告诉 Pod，我们的库的运行环境、版本、依赖、资源文件、编译文件等。
+
+***到目前为止，我们已经有两个 SVN 仓库了，一个用来存放私有 podspec 文件，一个用来存放我们私有库的代码***
+
+### <a name="create-private-repo">3.4 添加 CocoaPods 私有 Repo</a>
+
+Pod 是从本地的索引库先去找到需要的库，然后再去执行下载库与依赖安装的。因此我们要将第二步创建的 podspec 文件的 svn 仓库添加为 Pod 本地索引库，以便在执行 pod install 或者 update 的时候能找到对应的库。
+首先在终端执行`pod repo`命令，默认情况下你都会一个 `master`仓库的输出，
+
+![Image text](/img/A022DE09-701D-43DC-86A9-217247D30B80.png)
+
+这个就是 CocoaPods 的默认索引仓库。如果需要将一个 git仓库设为索引库，只需要执行:
+
+```
+pod repo add NAME URL [BRANCH]
+```
+
+命令即可，其中 NAME 是本地的仓库名称，url 是 git 地址。
+
+
+但是，如果是一个 svn 仓库地址，如`svn://192.168.0.88/ios/SpecRepo`的地址，你会发现执行时会报错，此时就需要用我们的插件了。假设我们将本地仓库命名为 `TJSpecRepo `,那么命令应该这么写：
+
+```
+pod repo-svn add TJSpecRepo svn://192.168.0.88/ios/SpecRepo
+```
+再执行 `pod repo`，输出如下，除了 master 多了一个 TJSpecRepo。
+
+![Image text](/img/F59FC0E4-E083-4B5B-BF30-BB1FC5125630.png)
 
 ### <a name="create-podspec-file">3.5 编写podsepc文件</a>
 
