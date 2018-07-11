@@ -245,7 +245,7 @@ pod search LXBLog
 在 [repo-svn的 issues][link-repo-svn-issues] 有提到，但是这种方式实际上还是会报错。其实这个 issues 已经给出了答案，只不过没有说清楚，经过测试发现虽然 pod lib lint 执行会报错，但是只要配置没有问题，此时直接在 pod repo-svn push 以及 Podfile 中引入 LXBLogHelper 库都可以正常工作。结论就是如果是 svn 的仓库的话，pod lib lint 这一步可以先注释私有库，看看别的配置是否正确，最后再把依赖的私有库加进来，然后直接 push 该 podspec 文件并使用即可。
 
 **思路二：**
-当时也考虑使用 subspec 的方式来避免这个问题，就是我们只创建一个大的私有项目库，然后讲该项目按功能分成多个 subspec，subspec 的使用可以参考官方文档，做过 RN 开发的同学也可以参看 RN 里面 posspec 的配置。RN 将核心库分成了多个 subspec进行配置，subspec之间可以相互依赖。使用的时候只需要引入需要使用的 subspec 即可。
+当时也考虑使用 subspec 的方式来避免这个问题，就是我们只创建一个大的私有项目库，然后把该项目按功能分成多个 subspec，subspec 的使用可以参考官方文档，做过 RN 开发的同学也可以参看 RN 里面 podspec 的配置。RN 将核心库分成了多个 subspec 进行配置，subspec 之间可以相互依赖。使用的时候只需要引入需要使用的 subspec 即可。
 
 ![Image text](./img/E5612B59-7136-4E82-8C7D-F25BF2E4F5C3.png)
 
@@ -277,6 +277,6 @@ pod search LXBLog
 * [5] <https://github.com/CocoaPods/CocoaPods/> CocoaPods’s GitHub
 * [6] <https://github.com/dustywusty/cocoapods-repo-svn> cocoapods-repo-svn's GitHub
 
---
+----
 
 ### THE END
