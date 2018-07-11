@@ -268,7 +268,8 @@ pod search LXBLog
 [link-Command-line-Reference]: https://guides.cocoapods.org/terminal/commands.html
 [link-repo-svn-issues]: https://github.com/dustywusty/cocoapods-repo-svn/issues/13
 
-## ***参考文档***
+****
+***参考文档***
 
 * [1] <https://guides.cocoapods.org/syntax/podspec.html> Podspec Syntax Reference
 * [2] <https://guides.cocoapods.org/syntax/podfile.html> Podfile Syntax Reference
@@ -277,6 +278,6 @@ pod search LXBLog
 * [5] <https://github.com/CocoaPods/CocoaPods/> CocoaPods’s GitHub
 * [6] <https://github.com/dustywusty/cocoapods-repo-svn> cocoapods-repo-svn's GitHub
 
-----
+****
 
 ### THE END
