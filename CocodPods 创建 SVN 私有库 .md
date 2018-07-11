@@ -4,7 +4,8 @@
 * [准备](#title2)
 * [开始](#title3)
 * [后续](#title4)
-* [常见问题](#title5)
+
+<!--* [常见问题](#title5)-->
 
 
 ## <a name=title1>一、背景</a>
@@ -258,9 +259,8 @@ pod search LXBLog
 
 到此，CocoaPods 创建基于 SVN 的私有库基本已经可以正常使用了，更进一步可能会遇到的问题比如 swift 应用 OC，或者 OC 引用 swift 库需要在实际工作中进行分析。由于时间问题，文章中部分问题没有进行验证，只是在网络资料的基础上做了假设，可能存在偏颇，使用过程中如果遇到不相符的情况，希望可以得到提醒与纠正，在此谢过
 
-## <a name=title5>五、常见问题</a>
+<!--## <a name=title5>五、常见问题</a>-->
 
--
 
 [link-cocoapods-repo-svn-github]: https://github.com/dustywusty/cocoapods-repo-svn
 [link-Podspec-Syntax-Reference]: https://guides.cocoapods.org/syntax/podspec.html
@@ -268,7 +268,7 @@ pod search LXBLog
 [link-Command-line-Reference]: https://guides.cocoapods.org/terminal/commands.html
 [link-repo-svn-issues]: https://github.com/dustywusty/cocoapods-repo-svn/issues/13
 
-***参考文档***
+## ***参考文档***
 
 * [1] <https://guides.cocoapods.org/syntax/podspec.html> Podspec Syntax Reference
 * [2] <https://guides.cocoapods.org/syntax/podfile.html> Podfile Syntax Reference
