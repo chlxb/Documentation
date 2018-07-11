@@ -278,6 +278,9 @@ pod search LXBLog
 * [4] <https://guides.cocoapods.org/making/private-cocoapods.html> Private Pods
 * [5] <https://github.com/CocoaPods/CocoaPods/> CocoaPods’s GitHub
 * [6] <https://github.com/dustywusty/cocoapods-repo-svn> cocoapods-repo-svn's GitHub
+* [7] <https://blog.csdn.net/yohunl/article/details/48471489> cocoapods应用第二部分-私有库相关
+* [8] <https://www.jianshu.com/p/1e5927eeb341> Cocoapods使用私有库中遇到的坑
+* [9] <https://www.aliyun.com/jiaocheng/354045.html> 基于 svn 服务器及 cocoapods-repo-svn 插件进行组件化私有库的创建
 
 ****
 
