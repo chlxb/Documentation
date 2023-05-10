@@ -17,7 +17,9 @@
 
 CocoaPods 是 iOS 开发过程中常用的解决快速集成和依赖第三方库的方式之一，CocoaPods 工作原理如图所示（图片来自网络）：
 
-![Image text](./img/4D522EDA-4A08-40CA-BD5B-BB8C8E95A7FF.jpeg)
+![1.jpeg](../assets/e038cc985b724489df9e29d80e381892f5a1f01f.jpeg)
+
+
 
 用户在终端执行 pod install 命令的时候，cocoapods 会根据本地的 Spec 仓库索引到对应的库的 podspec 文件，根据文件中的设置来配置依赖。在安装 CocoaPods 的时候，会自动在`~/.cocoapods`下创建默认的官方 master repo。按照它的工作原理，如果我们可以创建私有 Spec Repo，并且可以使 pod install 的时候根据我们私有 Repo 中的Spec 进行对依赖的安装就可以了。实际上，CocoaPods 文档上指出，我们可以根据自己的需求添加自己的私有库，但是文档上支持的是基于 git 的私有库，文档也指出是支持 SVN 的。那么接下来，来看一看正确的创建姿势吧，主要流程如下：
 
@@ -104,7 +106,7 @@ pod repo-svn add TJSpecRepo svn://192.168.0.88/ios/SpecRepo
 
 再执行 `pod repo`，输出如下，除了 master 多了一个 TJSpecRepo。
 
-![Image text](/img/F59FC0E4-E083-4B5B-BF30-BB1FC5125630.png)
+![F59FC0E4-E083-4B5B-BF30-BB1FC5125630.png](../assets/2581c09bfe8dcd4c707f31fe5761ba1c9934fd58.png)
 
 ### <a name="create-podspec-file">3.5 编写podsepc文件</a>
 

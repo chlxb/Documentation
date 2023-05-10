@@ -74,7 +74,3 @@ vagrant box add [title(本地box的名字，一般可以使用base)] [url/filena
 ## 挂起当前的虚拟机
 
 `vagrant suspend`
-
-
-
-

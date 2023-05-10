@@ -41,22 +41,30 @@ Connection的开销将是巨大的，效率也较低。Channel是在connection �
 # 1 工作模式
 
 1. simple 简单模式:  一个消费者消费一个生产者生产的信息
-   ![Alt text](assets/WechatIMG25.png)
+
+![rabbit_single.png](../../assets/6548f298f2efc3498ad1eab9776ae7c76fe8e25d.png)
+
+   
 
 2. work queues 工作模式: 一个生产者生产信息，多个消费者进行消费，但是一条消息只能消费一次
     利用该特点，在消息积压较多的时候，可以考虑开启多个消费端来处理
-   ![Alt text](assets/WechatIMG26.png)
+   
+   ![WechatIMG26.png](../../assets/eeb8b1475b0e8a4a15fac1f61cc5172261e33e56.png)
 
 3. Publish/Subscribe 发布订阅模式: 生产者首先投递消息到交换机，订阅了这个交换机的队列就会收到生产者投递的消息
    
     消息被路由投递给多个队列，一个消息被多个消费者获取，订阅模式需要设置exchange(交换机)
-   ![Alt text](assets/WechatIMG27.png)
+   
+   
+   ![WechatIMG27.png](../../assets/65bbcd3349cca3ae585fb77c9deaaba895c0710f.png)
 
 4. Routing 路由模式: 生产者生产消息投递到direct交换机中，扇出交换机会根据消息携带的routing Key匹配相应的队列
    
     一个消息被多个消费者获取，并且消息的目标队列可被生产者指定
 
-![Alt text](assets/WechatIMG28.png)
+![WechatIMG28.png](../../assets/0cd448ee178aefc30835ada5de8a8ccc484b80f6.png)
+
+
 
 5. Topics 主题模式:  生产者生产消息投递到topic交换机中，上面是完全匹配路由键，而主题模式是模糊匹配，只要有合适规则的路由就会投递给消费者
    
@@ -67,7 +75,9 @@ Connection的开销将是巨大的，效率也较低。Channel是在connection �
         1. 消息分发的匹配规则从原来的 ***确定匹配*** 变成了 **通配匹配**
         2. exchange type 变成了 topic
    
-   ![Alt text](assets/WechatIMG29.png)
+   ![WechatIMG29.png](../../assets/754d0873f8ad30d3fa5680cbd0278f44c6dda9d4.png)
+   
+   
 
 # 2 常用命令
 
